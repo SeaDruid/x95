@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "x95 - A retro everything app extension for X and Grok",
+  "version": "1.0",
+  "content_scripts": [{
+    "matches": ["https://twitter.com/*", "https://x.com/*"],
+    "css": ["98.css"],
+    "js": ["frontend.js"]
+  }]
+}

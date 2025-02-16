@@ -1,0 +1,59 @@
+/* Variables */
+:root {
+    --bg-main: #008080;
+    --color-main: #fff;
+    --color-inverted: #000;
+}
+
+
+
+/* Background/color/fill overrides */
+body,
+[aria-label="Home timeline"],
+[aria-label="Trending"] > div > div {
+    background: var(--bg-main) !important
+}
+
+[data-testid="UserName"] span,
+[role="tab"] span,
+[data-testid="UserProfileHeader_Items"] span,
+a span,
+nav span,
+[data-testid="UserCell"] span,
+[data-testid="socialContext"],
+[data-testid="SideNav_AccountSwitcher_Button"] span,
+[aria-label="Timeline: Trending now"] span,
+time {
+    color: var(--color-main) !important;
+}
+
+[data-testid="tweet"] svg,
+[data-testid="UserCell"] svg,
+[data-testid="UserProfileHeader_Items"] svg {
+    fill: #fff !important
+}
+
+
+
+/* Buttons */
+[aria-label="Home timeline"] > div:last-child > div > div > div:first-child div [role="link"],
+[aria-label="Who to follow"] button,
+ [data-testid="UserCell"] button {
+    background: silver !important;
+    border: none;
+    border-radius: 0;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+    box-sizing: border-box;
+    color: transparent;
+    min-height: 23px;
+    min-width: 75px;
+    padding: 0 12px;
+    text-shadow: 0 0 #222;
+}
+
+[aria-label="Home timeline"] > div:last-child > div > div > div:first-child div [role="link"] span,
+[aria-label="Who to follow"] button span,
+[data-testid="UserCell"] button span {
+    color: var(--color-inverted) !important;
+    font-weight: 400;
+}

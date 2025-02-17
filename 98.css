@@ -78,7 +78,8 @@ main[role="main"] div {
 }
 
 [data-testid="primaryColumn"] > div > div:last-child > div > div > div:first-child,
-[aria-label="Home timeline"] article {
+[aria-label="Home timeline"] article,
+[role="progressbar"] + div {
   background: silver;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
 }
@@ -129,6 +130,11 @@ main[role="main"] div {
   display: flex;
   flex-direction: row;
 }
+
+[aria-label="Home timeline"] > div:first-child [role="navigation"] > div {
+    background: var(--bg-main);
+}
+
 
 /* Tabs */
 [role="navigation"] {

@@ -14,11 +14,11 @@ body,
   background: var(--bg-main) !important
 }
 
-[data-testid="UserName"] span,
-[role="tab"] span,
-[data-testid="UserProfileHeader_Items"] span,
 a span,
 nav span,
+[role="tab"] span,
+[data-testid="UserName"] span,
+[data-testid="UserProfileHeader_Items"] span,
 [data-testid="UserCell"] span,
 [data-testid="socialContext"],
 [data-testid="SideNav_AccountSwitcher_Button"] span,
@@ -56,4 +56,66 @@ time {
 [data-testid="UserCell"] button span {
   color: var(--color-inverted) !important;
   font-weight: 400;
+}
+
+
+/* Main Column */
+main[role="main"] {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+main[role="main"] div {
+  border: none;
+  color: var(--color-inverted);
+}
+
+[data-testid="primaryColumn"] > div > div:last-child > div > div > div:first-child,
+[aria-label="Home timeline"] article {
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+}
+[data-testid="primaryColumn"] > div > div:last-child > div > div > div:first-child div,
+[data-testid="primaryColumn"] > div > div:last-child > div > div > div:first-child span {
+  color: var(--color-inverted) !important;
+}
+[data-testid="primaryColumn"] > div > div:last-child > div > div > div:first-child svg {
+  fill:  var(--color-inverted) !important;
+}
+[aria-label="Home timeline"] article  {
+  margin-top: 1em;    
+}
+
+[aria-label="Home timeline"] article div,
+[aria-label="Home timeline"] article span,
+[aria-label="Home timeline"] article div time {
+    color: var(--color-inverted) !important;
+}
+[aria-label="Home timeline"] article svg {
+    fill: var(--color-inverted) !important;
+}
+[aria-label="Home timeline"] article [data-testid="Tweet-User-Avatar"] + div {
+    background: none;
+}
+[aria-label="Home timeline"] article > div > div > div:first-child > div:first-child > div:first-child {
+    visibility: hidden;
+}
+
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div {
+  background: linear-gradient(90deg, navy, #1084d0); !important;
+}
+
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div div {
+  background: none;
+  color: var(--color-main) !important;
+}
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div h2,
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div h2 + div {
+  font-size: 11px;
+  vertical-align: middle;
+  display: inline-block;
+}
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div > div > div > div > div:last-child > div {
+  display: flex;
+  flex-direction: row;
 }

@@ -10,8 +10,10 @@
 /* Background/color/fill overrides */
 body,
 [aria-label="Home timeline"],
-[aria-label="Trending"] > div > div {
-  background: var(--bg-main) !important
+[aria-label="Trending"] > div > div,
+[aria-label="Trending"] aside,
+[aria-label="Trending"] section {
+    background: var(--bg-main) !important;
 }
 
 a span,
@@ -116,9 +118,12 @@ main[role="main"] div {
 }
 [data-testid="primaryColumn"] > div > div:first-child > div > div > div h2,
 [data-testid="primaryColumn"] > div > div:first-child > div > div > div h2 + div {
-  font-size: 11px;
   vertical-align: middle;
   display: inline-block;
+}
+[data-testid="primaryColumn"] > div > div:first-child > div > div > div h2 + div {
+    margin-left: 1em;
+    top: 0.5em;
 }
 [data-testid="primaryColumn"] > div > div:first-child > div > div > div > div > div > div > div:last-child > div {
   display: flex;
@@ -135,7 +140,7 @@ main[role="main"] div {
     list-style-type: none;
     margin: 0 0 -2px;
     position: relative;
-    margin-bottom: -1em;
+    margin-bottom: -1em !important;
 }
 
 [role="tablist"] [role="tab"] {
@@ -161,4 +166,21 @@ main[role="main"] div {
 
 [data-testid="ScrollSnap-SwipeableList"] {
     top: 15px;
+}
+
+/* Textarea */
+form[role="search"] {
+    background: var(--bg-main) !important;
+}
+[role="search"] > div > div {
+    appearance: none;
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    box-sizing: border-box;
+    padding: 3px 4px;
+    margin-top: 1.5em;
+}
+[role="search"] input {
+    color: var(--color-inverted);
 }

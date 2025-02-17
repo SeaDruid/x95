@@ -23,6 +23,7 @@ nav span,
 [data-testid="socialContext"],
 [data-testid="SideNav_AccountSwitcher_Button"] span,
 [aria-label="Timeline: Trending now"] span,
+[data-testid="empty_state_body_text"],
 time {
   color: var(--color-main) !important;
 }
@@ -38,7 +39,9 @@ time {
 /* Buttons */
 [aria-label="Home timeline"] > div:last-child > div > div > div:first-child div [role="link"],
 [aria-label="Who to follow"] button,
-[data-testid="UserCell"] button {
+[data-testid="UserCell"] button,
+[aria-label="Post"],
+[data-testid="empty_state_button_text"] {
   background: silver !important;
   border: none;
   border-radius: 0;
@@ -47,13 +50,15 @@ time {
   color: transparent;
   min-height: 23px;
   min-width: 75px;
-  padding: 0 12px;
+  padding: 6px 12px;
   text-shadow: 0 0 #222;
 }
 
 [aria-label="Home timeline"] > div:last-child > div > div > div:first-child div [role="link"] span,
 [aria-label="Who to follow"] button span,
-[data-testid="UserCell"] button span {
+[data-testid="UserCell"] button span,
+[aria-label="Post"] span,
+[data-testid="empty_state_button_text"] span {
   color: var(--color-inverted) !important;
   font-weight: 400;
 }
@@ -118,4 +123,42 @@ main[role="main"] div {
 [data-testid="primaryColumn"] > div > div:first-child > div > div > div > div > div > div > div:last-child > div {
   display: flex;
   flex-direction: row;
+}
+
+/* Tabs */
+[role="navigation"] {
+    border: none;
+}
+
+[role="tablist"] {
+    display: flex;
+    list-style-type: none;
+    margin: 0 0 -2px;
+    position: relative;
+    margin-bottom: -1em;
+}
+
+[role="tablist"] [role="tab"] {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: inset -1px 0 #0a0a0a, inset 1px 1px #dfdfdf, inset -2px 0 grey, inset 2px 2px #fff;
+    z-index: 1;
+    background: silver;
+}
+[role="tablist"] [role="tab"] span {
+    color: var(--color-inverted) !important;
+    font-weight: 400;
+    position: relative;
+    top: -0.35em;
+}
+
+[role="tab"][aria-selected="false"] {
+    top: .5em;
+}
+[role="tab"][aria-selected="false"] span {
+    top: -0.55em;    
+}
+
+[data-testid="ScrollSnap-SwipeableList"] {
+    top: 15px;
 }

@@ -35,16 +35,46 @@
   
             // Initialize Clippy
             clippy.load('Clippy', agent => {
+              window.agent = window.agent || {}
+              window.agent.clippy = agent
               agent.show();
-              agent.moveTo(rect.x, rect.y);
+              agent.moveTo(rect.x + rect.width/2, rect.y);
 
-              // Add click event to Clippy
-              $(agent._el).on('click', () => {
-                $('html').toggleClass('grok-hidden');
-                const grokButton = document.querySelector('[data-testid="GrokDrawer"] button');
-                if (grokButton) {
-                  grokButton.click();
+              // Drag tracking variables
+              let isDragging = false;
+              let dragStart = { x: 0, y: 0 };
+              const CLICK_THRESHOLD = 5; // pixels
+
+              // Handle mouse down
+              agent._el[0].addEventListener('mousedown', e => {
+                isDragging = false;
+                dragStart = { x: e.clientX, y: e.clientY };
+              });
+
+              // Handle mouse move during drag
+              agent._el[0].addEventListener('mousemove', e => {
+                if (!dragStart) return;
+                
+                const dx = Math.abs(e.clientX - dragStart.x);
+                const dy = Math.abs(e.clientY - dragStart.y);
+                
+                if (dx > CLICK_THRESHOLD || dy > CLICK_THRESHOLD) {
+                  isDragging = true;
                 }
+              });
+
+              // Handle mouse up
+              agent._el[0].addEventListener('mouseup', e => {
+                if (!isDragging) {
+                  // Only trigger toggle if not dragged
+                  $('html').toggleClass('grok-hidden');
+                  const grokButton = document.querySelector('[data-testid="GrokDrawer"] button');
+                  if (grokButton) grokButton.click();
+                }
+                
+                // Reset drag state
+                isDragging = false;
+                dragStart = null;
               });
             }, undefined, '${chrome.runtime.getURL('assets/agents/')}');
           } catch (error) {

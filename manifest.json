@@ -1,10 +1,21 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "x95 - A retro everything app extension for X and Grok",
   "version": "1.0",
+  "description": "Injects ClippyJS into the page with positioned GrokDrawer",
+  "permissions": ["<all_urls>", "storage", "activeTab"],
+  "background": {
+    "scripts": ["hot-reload.js"]
+  },
   "content_scripts": [{
-    "matches": ["https://twitter.com/*", "https://x.com/*"],
     "css": ["98.css"],
-    "js": ["frontend.js"]
-  }]
+    "matches": ["https://twitter.com/*", "https://x.com/*"],
+    "js": ["frontend.js"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [
+    "jquery.js",
+    "clippy.js",
+    "assets/agents/*"
+  ]
 }

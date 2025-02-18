@@ -46,7 +46,7 @@ time {
 [data-testid="empty_state_button_text"] {
   background: silver !important;
   border: none;
-  border-radius: 0;
+  border-radius: 0 !important;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
   box-sizing: border-box;
   color: transparent;
@@ -181,7 +181,7 @@ form[role="search"] {
 [role="search"] > div > div {
     appearance: none;
     background-color: #fff;
-    border-radius: 0;
+    border-radius: 0 !important;
     box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
     box-sizing: border-box;
     padding: 3px 4px;
@@ -189,4 +189,21 @@ form[role="search"] {
 }
 [role="search"] input {
     color: var(--color-inverted);
+}
+
+/* Sidebars */
+[aria-label="Timeline: Trending now"] {
+  display: none !important;
+}
+
+/* Clippy */
+html.grok-hidden [data-testid="GrokDrawer"] {
+  visibility: hidden !important;
+}
+[data-testid="GrokDrawer"] {
+  top: -50px !important;
+}
+
+.clippy {
+  position: fixed;
 }

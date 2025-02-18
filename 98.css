@@ -11,6 +11,7 @@
 body,
 [aria-label="Home timeline"],
 [aria-label="Trending"] > div > div,
+[aria-label="Trending"] > div > div > div,
 [aria-label="Trending"] aside,
 [aria-label="Trending"] section {
     background: var(--bg-main) !important;
@@ -43,7 +44,8 @@ time {
 [aria-label="Who to follow"] button,
 [data-testid="UserCell"] button,
 [aria-label="Post"],
-[data-testid="empty_state_button_text"] {
+[data-testid="empty_state_button_text"],
+[data-testid="GrokDrawer"] button[aria-label="Media"] {
   background: silver !important;
   border: none;
   border-radius: 0 !important;
@@ -152,8 +154,8 @@ main[role="main"] div {
 [role="tablist"] [role="tab"] {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    box-shadow: inset -1px 0 #0a0a0a, inset 1px 1px #dfdfdf, inset -2px 0 grey, inset 2px 2px #fff;
     z-index: 1;
+    box-shadow: inset -1px 0 #0a0a0a, inset 1px 1px #dfdfdf, inset -2px 0 grey, inset 2px 2px #fff;
     background: silver;
 }
 [role="tablist"] [role="tab"] span {
@@ -191,19 +193,106 @@ form[role="search"] {
     color: var(--color-inverted);
 }
 
+
 /* Sidebars */
 [aria-label="Timeline: Trending now"] {
   display: none !important;
 }
 
 /* Clippy */
+.clippy {
+  position: fixed;
+}
 html.grok-hidden [data-testid="GrokDrawer"] {
   visibility: hidden !important;
 }
 [data-testid="GrokDrawer"] {
   top: -50px !important;
 }
+[data-testid="GrokDrawer"] > div {
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+  border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+[data-testid="GrokDrawer"] > div > div:first-child > div > div > div {
+  background: linear-gradient(90deg, navy, #1084d0);
+}
+[data-testid="GrokDrawer"] div {
+    border-radius: 0 !important;    
+}
+[data-testid="GrokDrawerHeader"] + div span {
+    color: var(--color-inverted);
+}
 
-.clippy {
-  position: fixed;
+[data-testid="GrokDrawerHeader"] + div > div > div > div:first-child > div:last-child {
+    appearance: none;
+    background: #fff;
+    background-color: #fff;
+    border-radius: 0 !important;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    box-sizing: border-box;
+    padding: 3px 4px;
+}
+[data-testid="GrokDrawerHeader"] + div > div > div > div:first-child > div:last-child textarea {
+    color: #000;
+}
+
+[data-testid="GrokDrawer"] [data-testid="ScrollSnap-SwipeableList"] [role="presentation"] > div > div {
+  background: silver !important;
+  border: none;
+  border-radius: 0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+  box-sizing: border-box;
+  color: transparent;
+  min-height: 23px;
+  min-width: 75px;
+  padding: 6px 12px;
+  text-shadow: 0 0 #222;
+}
+
+[data-testid="GrokDrawer"] [data-testid="ScrollSnap-SwipeableList"] [role="presentation"] > div > div span {
+    color: #000 !important;
+}
+[data-testid="GrokDrawer"] [data-testid="ScrollSnap-SwipeableList"] [role="presentation"] > div > div svg {
+    fill: #000
+}
+
+[data-testid="GrokDrawerHeader"] + div > div:last-child > div {
+    background: none;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px silver, inset -2px -2px grey, inset 2px 2px silver;  
+}
+
+[aria-label="Grok something"] > div > div {
+    color: silver !important;
+    height: 28px;
+}
+[aria-label="Grok something"]:not([disabled]) > div > div {
+    color: #000 !important;
+}
+[aria-label="Grok something"]:not([disabled]) > div > div {
+  border-radius: 0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+  box-sizing: border-box;
+  color: transparent;
+  padding: 5px 5px;
+  text-shadow: 0 0 #222;
+  background: silver;
+  height: 28px;
+}
+
+/* Big Grok */
+[data-testid="primaryColumn"] [aria-label="Grok"] > div:last-child > div > div > div > div > div:first-child > div:last-child {
+    appearance: none;
+    background: #fff;
+    background-color: #fff;
+    border-radius: 0 !important;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    box-sizing: border-box;
+    padding: 3px 4px;
+
+}
+[data-testid="primaryColumn"] [aria-label="Grok"] > div:last-child > div > div > div > div {
+    box-shadow: inset -1px 0 #0a0a0a, inset 1px 1px #dfdfdf, inset -2px 0 grey, inset 2px 2px #fff;
+    background: silver !important;
 }

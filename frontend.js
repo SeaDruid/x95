@@ -80,6 +80,119 @@
           } catch (error) {
             console.error('Failed to find GrokDrawer:', error);
           }
+
+          // Add this code after the Clippy initialization in your existing script
+          const CODE_POLLER = () => {
+            const CODE_TYPES = new Set(['html', 'css', 'javascript']);
+            let seenMessages = new Set();
+            let updateTimer = null;
+
+            const extractCode = (element) => {
+              const codeBlocks = [];
+              
+              $(element).find('[data-testid="markdown-code-block"]').each((i, block) => {
+                const prefix = $(block).find('div:first-child > div:first-child span').text().toLowerCase();
+                if (CODE_TYPES.has(prefix)) {
+                  const content = $(block).find('code').text();
+                  codeBlocks.push({ type: prefix, content });
+                }
+              });
+
+              return codeBlocks;
+            };
+
+            const checkForUpdates = () => {
+              const messages = $('[data-testid="GrokDrawerHeader"] + div > div:first-child > div:last-child')
+                .children(':nth-child(odd)');
+
+              messages.each((index, message) => {
+                if (!seenMessages.has(message)) {
+                  seenMessages.add(message);
+                  
+                  // Reset the debounce timer on new message
+                  clearTimeout(updateTimer);
+                  updateTimer = setTimeout(processFinalMessage, 2000);
+                }
+              });
+            };
+
+            const createHtmlSandbox = (htmlContent) => {
+              // Remove any existing windows
+              $('.grokkedclippy-window').remove();
+
+              // Create window structure with close button
+              const windowMarkup = '<div class="grokkedclippy-window"><header>HTML Sandbox <button class="close-btn">x</button></header><iframe id="html-sandbox"></iframe></div>';
+
+              // Inject into DOM
+              $('body').append(windowMarkup);
+              
+              const window = $('.grokkedclippy-window')[0];
+              const header = window.querySelector('header');
+              
+              // Add close button handler
+              window.querySelector('.close-btn').addEventListener('click', () => {
+                window.remove();
+              });
+
+              // Make draggable via header
+              let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+              
+              header.onmousedown = dragMouseDown;
+
+              function dragMouseDown(e) {
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+              }
+
+              function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                window.style.top = (window.offsetTop - pos2) + "px";
+                window.style.left = (window.offsetLeft - pos1) + "px";
+              }
+
+              function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+              }
+
+              // Write content to iframe
+              const iframe = $('#html-sandbox')[0];
+              const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+              iframeDoc.open();
+              iframeDoc.write(htmlContent);
+              iframeDoc.close();
+            };
+            
+            // Modify the processFinalMessage function
+            const processFinalMessage = () => {
+              const lastMessage = $('[data-testid="GrokDrawerHeader"] + div > div:first-child > div:last-child')
+                .children(':nth-child(odd)').last();
+              
+              const codeData = extractCode(lastMessage);
+              
+              codeData.forEach(({ type, content }) => {
+                if (type === 'html') {
+                  createHtmlSandbox(content);
+                }
+              });
+            };
+
+
+            // Start polling
+            setInterval(checkForUpdates, 2000);
+          };
+
+          // Initialize the poller after Clippy setup
+          $(document).ready(() => {
+            CODE_POLLER();
+          });          
         });
       `;
       document.head.appendChild(initScript);
